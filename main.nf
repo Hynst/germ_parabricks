@@ -10,10 +10,9 @@ process GERMLINE{
 	publishDir "${launchDir}/results/${idPatient}", mode: 'copy'
 	
 	memory 20.GB
-	accelerator 1
 		
 	input:
-	set file1, file2, idPatient
+	tuple val(idPatient), val(gender), val(status), val(idSample), val(idRun), val(file1), val(file2)
 
 	output:
 	path "*"
@@ -26,7 +25,7 @@ process GERMLINE{
 		--knownSites /mnt/shared/MedGen/ACGT/ref_parabricks/Homo_sapiens_assembly38.known_indels.vcf \
 		--out-bam ${idPatient}.bam \
 		--out-variants ${idPatient}.vcf \
-		--out-recal-file ${idPatient}_recal.txt > log
+		--out-recal-file ${idPatient}_recal.txt
 	"""
 
 }
