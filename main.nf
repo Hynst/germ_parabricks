@@ -22,7 +22,7 @@ process GERMLINE{
 	knownsite = params.knownsites
 
 	"""
-	/parabricks/run_pipeline.py germline \
+	pbrun germline \
 		--ref ${ref} \
 		--in-fq ${file1} ${file2} \
 		--knownSites ${knownsite} \
