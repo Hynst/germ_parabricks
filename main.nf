@@ -12,17 +12,20 @@ process GERMLINE{
 	memory 20.GB
 		
 	input:
-	tuple val(idPatient), val(gender), val(status), val(idSample), val(idRun), val(file1), val(file2)
+	tuple val(idPatient), val(gender), val(status), val(idSample), val(idRun), val(file1), val(file2) 
 
 	output:
 	path "*"
 
 	script:
+	ref = params.ref
+	knownsite = params.knownsites
+
 	"""
 	/parabricks/run_pipeline.py germline \
-		--ref /mnt/shared/MedGen/ACGT/ref_parabricks/Homo_sapiens_assembly38.fasta \
+		--ref ${ref} \
 		--in-fq ${file1} ${file2} \
-		--knownSites /mnt/shared/MedGen/ACGT/ref_parabricks/Homo_sapiens_assembly38.known_indels.vcf \
+		--knownSites ${knownsite} \
 		--out-bam ${idPatient}.bam \
 		--out-variants ${idPatient}.vcf \
 		--out-recal-file ${idPatient}_recal.txt
