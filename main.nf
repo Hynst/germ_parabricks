@@ -9,7 +9,7 @@ process GERMLINE{
 
 	publishDir "${launchDir}/results/${idPatient}", mode: 'copy'
 	
-	memory 128.GB
+	memory 300.GB
 		
 	input:
 	tuple val(idPatient), val(gender), val(status), val(idSample), val(idRun), val(file1), val(file2) 
